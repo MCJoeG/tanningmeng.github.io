@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>tanjiancheng</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="t 的学习笔记 标签（空格分隔）： Java  [TOC] 相关命令行解释基本的命令行| 命令        | 解释   || ——–   | :—–:  || git status|查看已经被修改，但是没有被提交的文件|| git diff  |查看具体的修改记录（diff = different）|| git log   |显示从最近到最远的提交日志（可以看得见 SHA 码；如果输出信息太多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tanjiancheng">
+<meta property="og:url" content="http://yoursite.com/2017/10/18/git的学习笔记/index.html">
+<meta property="og:site_name" content="tanjiancheng">
+<meta property="og:description" content="t 的学习笔记 标签（空格分隔）： Java  [TOC] 相关命令行解释基本的命令行| 命令        | 解释   || ——–   | :—–:  || git status|查看已经被修改，但是没有被提交的文件|| git diff  |查看具体的修改记录（diff = different）|| git log   |显示从最近到最远的提交日志（可以看得见 SHA 码；如果输出信息太多">
+<meta property="og:updated_time" content="2017-10-18T02:44:19.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tanjiancheng">
+<meta name="twitter:description" content="t 的学习笔记 标签（空格分隔）： Java  [TOC] 相关命令行解释基本的命令行| 命令        | 解释   || ——–   | :—–:  || git status|查看已经被修改，但是没有被提交的文件|| git diff  |查看具体的修改记录（diff = different）|| git log   |显示从最近到最远的提交日志（可以看得见 SHA 码；如果输出信息太多">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a9fb8c95ab8b5716e7d9c9f238c0d6bc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#相关命令行解释"><span class="toc-text">相关命令行解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IntelliJ-IDEA-提交代码到远程及可能遇到的一些问题"><span class="toc-text">IntelliJ IDEA 提交代码到远程及可能遇到的一些问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在-IntelliJ-IDEA-上新建项目与-Github-连接（简单教程）"><span class="toc-text">在 IntelliJ IDEA 上新建项目与 Github 连接（简单教程）</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-git的学习笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">(no title)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>JianCheng Tan</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>t 的学习笔记</p>
+<p>标签（空格分隔）： Java</p>
+<hr>
+<p>[TOC]</p>
+<h1 id="相关命令行解释"><a href="#相关命令行解释" class="headerlink" title="相关命令行解释"></a>相关命令行解释</h1><p><strong>基本的命令行</strong><br>| 命令        | 解释   |<br>| ——–   | :—–:  |<br>| git status|查看已经被修改，但是没有被提交的文件|<br>| git diff  |查看具体的修改记录（diff = different）|<br>| git log   |显示从最近到最远的提交日志（可以看得见 SHA 码；如果输出信息太多可以加上 –pretty=oneline|<br>| git checkout – file  |可以放弃工作区的修改（–很重要，没有–，就变成了“切换到另一个分支”的命令）|<br>| git push -u origin master|将当前分支 <code>master</code> 推送到远程|<br>| git remote add origin git@server-name:path/repo-name.git|关联一个远程库|  </p>
+<p><strong>提交修改和提交新文件</strong><br>第一步：</p>
+<pre><code>git add
+</code></pre><p>第二步：</p>
+<pre><code>git commit -m “”   双引号中间是备注
+</code></pre><p><strong>回退版本</strong></p>
+<pre><code>git reset --hard HEAD^   回退到上一个版本
+git reset --hard SHA     根据 SHA 来回退到某一个版本
+</code></pre><h1 id="IntelliJ-IDEA-提交代码到远程及可能遇到的一些问题"><a href="#IntelliJ-IDEA-提交代码到远程及可能遇到的一些问题" class="headerlink" title="IntelliJ IDEA 提交代码到远程及可能遇到的一些问题"></a>IntelliJ IDEA 提交代码到远程及可能遇到的一些问题</h1><p><strong>相关步骤</strong></p>
+<ol>
+<li>配置 <code>git</code> </li>
+<li>配置 <code>gitHub</code> 的账号</li>
+<li>clone 项目下来本地</li>
+<li>提交代码：右键项目 <code>Git</code> -&gt; <code>Add</code> -&gt; <code>Commit</code> （先 add 再提交！）。</li>
+</ol>
+<p><strong>Git Shell 中配置远程仓库</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd 项目目录</div><div class="line">git remote add origin 项目 githubAddress</div><div class="line">git push -u origin master</div></pre></td></tr></table></figure></p>
+<p>中间如果有报错 请参考下边的解决方法<br> 1.<strong>fatal:remote origin already exists</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote rm origin</div></pre></td></tr></table></figure></p>
+<p> 2.<strong>error:Could not remove config section ‘remote.origin’</strong><br>需要修改gitconfig文件的内容 找到github的安装路径，我是C:\Users\Administrator\AppData<br>\Local\GitHub\PortableGit_0f65d050d0c352找到一个名为gitconfig的文件，打开它把里面的[remote “origin”]那一行删掉<br>重启gitshell  执行上述操作。<br>3.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git push -u origin master</div><div class="line">To git@github.com:xxx/xxx.git</div><div class="line"> ! [rejected]        master -&gt; master (fetch first)</div><div class="line">error: failed to push some refs to 'git@github.com:xxx/xxx.git'</div><div class="line">hint: Updates were rejected because the remote contains work that you do</div><div class="line">hint: not have locally. This is usually caused by another repository pushing</div><div class="line">hint: to the same ref. You may want to first integrate the remote changes</div><div class="line">hint: (e.g., 'git pull ...') before pushing again.</div><div class="line">hint: See the 'Note about fast-forwards' in 'git push --help' for details.</div></pre></td></tr></table></figure></p>
+<p>造成这个原因的一般是因为远程仓库对比本地仓库有文件是没有的（例如 README.md）。所以我们在提交前要进行拉取。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git pull --rebase origin master  //先拉取内容</div><div class="line">git push -u origin master        //再推送到 master</div></pre></td></tr></table></figure></p>
+<p><strong>另一种做法</strong><br>在 Github 上创建仓库并复制仓库地址比如 <a href="https://github.com/lujianing/demo.git，" target="_blank" rel="external">https://github.com/lujianing/demo.git，</a><br>然后在 IntelliJ IDEA 中 <code>VCS</code> -&gt; <code>Checkout from Version Contrl</code> -&gt; <code>Git</code> 中，粘贴仓库 url 地址，会从 Github 仓库中拷贝一份项目，然后就可以在本地直接进行 git 操作。并且可以push到github仓库中（会提示你输入github的仓库和密码）。</p>
+<p><strong>IntelliJ IDEA进行 push/pull</strong><br>右键项目，<code>Git</code> -&gt; <code>Repository</code> -&gt; <code>Push</code><br>右键项目，<code>Git</code> -&gt; <code>Repository</code> -&gt; <code>Pull</code></p>
+<p><strong>多人协作开发</strong><br>在 <code>GitHub</code> 项目的 <code>settings</code> -&gt; <code>Collaborators</code> 添加成员。</p>
+<p><strong>忽略 .idea 文件夹</strong><br>首先你需要从 github 新建的仓库中拉去 .gitignore，然后<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">git rm -rf --cached targetFile</div></pre></td></tr></table></figure></p>
+<p>这个命令行想要 <code>.gitignore</code> 起作用，必须要在这些文件不在暂存区中才可以，<code>.gitignore</code> 文件只是忽略没有被 staged(cached) 文件，对于已经被 staged 文件，加入 ignore 文件时一定要先从 staged 移除，才可以忽略。</p>
+<h1 id="在-IntelliJ-IDEA-上新建项目与-Github-连接（简单教程）"><a href="#在-IntelliJ-IDEA-上新建项目与-Github-连接（简单教程）" class="headerlink" title="在 IntelliJ IDEA 上新建项目与 Github 连接（简单教程）"></a>在 IntelliJ IDEA 上新建项目与 Github 连接（简单教程）</h1><ol>
+<li>首先在本地上创建好你的项目，及项目的框架。</li>
+<li><p>然后执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd 项目文件夹</div><div class="line">git init        //建立此项目的本地 git 仓库</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后在 Github 上新建项目所属的仓库。由于第一次创建，上面可能会有 <code>.gitignore</code> <code>README.md</code> 等文件在本地仓库是没有的，所以我们先要进行拉取。执行命令行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote add origin 项目 githubAddress  //将它们关联起来</div><div class="line">git pull --rebase origin master  //先拉取内容</div></pre></td></tr></table></figure>
+</li>
+<li><p>拉取完了，我们可以开始推送了。<strong><em>右键项目</em></strong> -&gt; <code>git</code> -&gt; <code>add</code>，然后再<strong><em>右键项目</em></strong> -&gt; <code>git</code> -&gt; <code>commint</code>。这时文件都提交到本地仓库了，然后我们就可以通过命令行进行提交到远程了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master        //推送到远程github master</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置忽略 .idea 文件夹</strong>。一般来说，github 项目都是不带上相关编译器的文件的，这样比较纯净。所以我们要设置忽略 .idea 文件夹。可以根据上面的<strong>忽略 .idea 文件夹</strong>的教程进行调整。</p>
+</li>
+</ol>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/17/第一次CCF计算机职业资格认证考试/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2017/10/18/git的学习笔记/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
