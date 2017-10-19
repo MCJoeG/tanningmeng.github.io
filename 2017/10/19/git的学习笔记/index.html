@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>git的学习笔记 | tanjiancheng</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Git," />
+  
+
+  <meta name="description" content="Git 的术语一种好玩的解释首先我们来看几个术语： HEAD这是当前分支版本顶端的别名，也就是在当前分支你最近的一个提交 Indexindex也被称为staging area，是指一整套即将被下一个提交的文件集合。他也是将成为HEAD的父亲的那个commit Working Copyworking copy代表你正在工作的那个文件集 Flow当你第一次checkout一个分支，HEAD就指向当前分">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/10/19/git的学习笔记/index.html">
+<meta property="og:site_name" content="tanjiancheng">
+<meta property="og:description" content="Git 的术语一种好玩的解释首先我们来看几个术语： HEAD这是当前分支版本顶端的别名，也就是在当前分支你最近的一个提交 Indexindex也被称为staging area，是指一整套即将被下一个提交的文件集合。他也是将成为HEAD的父亲的那个commit Working Copyworking copy代表你正在工作的那个文件集 Flow当你第一次checkout一个分支，HEAD就指向当前分">
+<meta property="og:image" content="http://www.yiibai.com/uploads/images/201707/1307/810100749_17109.png">
+<meta property="og:image" content="http://www.yiibai.com/uploads/images/201707/1307/645100753_82870.png">
+<meta property="og:updated_time" content="2017-10-19T02:25:42.173Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git的学习笔记">
+<meta name="twitter:description" content="Git 的术语一种好玩的解释首先我们来看几个术语： HEAD这是当前分支版本顶端的别名，也就是在当前分支你最近的一个提交 Indexindex也被称为staging area，是指一整套即将被下一个提交的文件集合。他也是将成为HEAD的父亲的那个commit Working Copyworking copy代表你正在工作的那个文件集 Flow当你第一次checkout一个分支，HEAD就指向当前分">
+<meta name="twitter:image" content="http://www.yiibai.com/uploads/images/201707/1307/810100749_17109.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a9fb8c95ab8b5716e7d9c9f238c0d6bc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-的术语"><span class="toc-text">Git 的术语</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一种好玩的解释"><span class="toc-text">一种好玩的解释</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#命令行"><span class="toc-text">命令行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-关于-pull，commint，push，merge-的总结"><span class="toc-text">Git 关于 pull，commint，push，merge 的总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-关于-rebase-和-merge-的区别"><span class="toc-text">Git 关于 rebase 和 merge 的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继续-和-终止"><span class="toc-text">继续 和 终止</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-隐藏-stash-的使用"><span class="toc-text">Git 隐藏 stash 的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-修正错误"><span class="toc-text">Git 修正错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-关于-reset-命令及其参数-–hard-soft-mixed"><span class="toc-text">Git 关于 reset 命令及其参数 –hard|soft|mixed</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reset-的应用场景"><span class="toc-text">reset 的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#–hard-soft-mixed"><span class="toc-text">–hard | soft | mixed</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的命令行"><span class="toc-text">基本的命令行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提交修改和提交新文件"><span class="toc-text">提交修改和提交新文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回退版本"><span class="toc-text">回退版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IntelliJ-IDEA-提交代码到远程及可能遇到的一些问题"><span class="toc-text">IntelliJ IDEA 提交代码到远程及可能遇到的一些问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#相关步骤"><span class="toc-text">相关步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Shell-中配置远程仓库"><span class="toc-text">Git Shell 中配置远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#另一种做法"><span class="toc-text">另一种做法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IntelliJ-IDEA进行-push-pull"><span class="toc-text">IntelliJ IDEA进行 push/pull</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多人协作开发"><span class="toc-text">多人协作开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#忽略-idea-文件夹"><span class="toc-text">忽略 .idea 文件夹</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在-IntelliJ-IDEA-上新建项目与-Github-连接（简单教程）"><span class="toc-text">在 IntelliJ IDEA 上新建项目与 Github 连接（简单教程）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#平时使用-Git-的一些注意事项"><span class="toc-text">平时使用 Git 的一些注意事项</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#错误大全"><span class="toc-text">错误大全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#从远程仓库中拉去失败-Fetch-failed-Could-not-read-from-remote-repository"><span class="toc-text">从远程仓库中拉去失败(Fetch failed: Could not read from remote repository.)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HEAD-detached-at-detached-HEAD-状态"><span class="toc-text">HEAD detached at (detached HEAD 状态)</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-git的学习笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">git的学习笔记</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.19</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>JianCheng Tan</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Git-的术语"><a href="#Git-的术语" class="headerlink" title="Git 的术语"></a>Git 的术语</h1><h2 id="一种好玩的解释"><a href="#一种好玩的解释" class="headerlink" title="一种好玩的解释"></a>一种好玩的解释</h2><p>首先我们来看几个术语：</p>
+<p><code>HEAD</code><br>这是当前分支版本顶端的别名，也就是在当前分支你最近的一个提交</p>
+<p><code>Index</code><br>index也被称为staging area，是指一整套即将被下一个提交的文件集合。他也是将成为HEAD的父亲的那个commit</p>
+<p><code>Working Copy</code><br>working copy代表你正在工作的那个文件集</p>
+<p><code>Flow</code><br>当你第一次checkout一个分支，HEAD就指向当前分支的最近一个commit。在HEAD中的文件集（实际上他们从技术上不是文件，他们是blobs（一团），但是为了讨论的方便我们就简化认为他们就是一些文件）和在index中的文件集是相同的，在working copy的文件集和HEAD,INDEX中的文件集是完全相同的。所有三者(HEAD,INDEX(STAGING),WORKING COPY)都是相同的状态，GIT很happy。</p>
+<p>当你对一个文件执行一次修改，Git感知到了这个修改，并且说：“嘿，文件已经变更了！你的working copy不再和index,head相同！”，随后GIT标记这个文件是修改过的。</p>
+<p>然后，当你执行一个git add,它就stages the file in the index，并且GIT说：“嘿，OK，现在你的working copy和index区是相同的，但是他们和HEAD区是不同的！”</p>
+<p>当你执行一个git commit,GIT就创建一个新的commit，随后HEAD就指向这个新的commit，而index,working copy的状态和HEAD就又完全匹配相同了，GIT又一次HAPPY了。</p>
+<p><strong><em>注意：</em></strong>这个跟命令 <code>reset</code> 只有一定关系的。当我们使用此命令不同的参数的时候，上面的三个术语有一定的联系。</p>
+<ul>
+<li>当使用 <code>--hard</code> 的时候，<code>HEAD</code>，<code>INDEX</code> 和 <code>Working copy</code> 都会不变</li>
+<li>使用 <code>--soft</code> 的时候，只有 <code>HEAD</code> 改变</li>
+<li>使用 <code>--mixed</code> 的时候，只有 <code>working copy</code> 不变（从尚未提交的暂存区域还原这些更改。它仅从暂存区域恢复更改）</li>
+</ul>
+<h1 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h1><h2 id="Git-关于-pull，commint，push，merge-的总结"><a href="#Git-关于-pull，commint，push，merge-的总结" class="headerlink" title="Git 关于 pull，commint，push，merge 的总结"></a>Git 关于 pull，commint，push，merge 的总结</h2><p>在解释着三个命令行之前，我先说一下：工作目录，缓存区，本地仓库，远程仓库。我们平时在修改代码的时候，被修改的文件都在缓存区。那这时候就要把缓存区的修改文件都提交到本地仓库。如果想提交到远程的服务器，那么我们就提交文件到远程仓库。最后一个是工作目录。这个是你当前修改文件的目录。文件到远程仓库的流程是： <code>工作区</code> -&gt; <code>add到缓冲区</code> -&gt; <code>commit到本地仓库</code> -&gt; <code>push到远程仓库</code>。<br>所以这三个命令有了解释：<br><code>add</code>：从工作目录拉去本地仓库<br><code>pull</code>：从远程仓库拉去文件到本地<br><code>commit</code>：从缓存区提交到本地仓库<br><code>push</code>：从本地提交到远程仓库<br><code>merge</code>：用于合并指定分支到当前分支，主要针对处于一个区域（缓存，本地或远程）的两个分支进行合并的。例如说，你在缓存有两个分支。你在其中一个叫 dev 的分支进行了修改，而 master 分支还没有更改，所以我们要 <code>merge</code> 这两个分支，这样两个分支的内容相同了。</p>
+<h2 id="Git-关于-rebase-和-merge-的区别"><a href="#Git-关于-rebase-和-merge-的区别" class="headerlink" title="Git 关于 rebase 和 merge 的区别"></a>Git 关于 rebase 和 merge 的区别</h2><p><code>rebase</code> 和 <code>merge</code> 的区别在于：如果同时有两个分支，分别 <code>origin</code> 和 <code>mywork</code>。然后两个分支都有了新的更新！如果使用 <code>merge</code> 的话，Git 会把 <code>origin</code> 的最新版本合并到 <code>mywork</code> 的最新版本中，然后 <code>origin</code> 和 <code>mywork</code> 都可以继续沿着自己的分支进行更新；如果使用 <code>rebase</code> 的话，Git 会把当前 mywork 的最新版本保存为一个补丁（patch，放置到 .git/rebase 中），然后取消掉 <code>mywork</code> 的所有提交（commit）并合并到 <code>origin</code> 的最新版本中，最后把补丁应用到 <code>mywork</code><br><img src="http://www.yiibai.com/uploads/images/201707/1307/810100749_17109.png" alt="condition"><br><img src="http://www.yiibai.com/uploads/images/201707/1307/645100753_82870.png" alt="git rebase and merge"></p>
+<h3 id="继续-和-终止"><a href="#继续-和-终止" class="headerlink" title="继续 和 终止"></a>继续 和 终止</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git rebase --continue    //继续 rebase，有可能是 rebase 过程冲突而需要继续</div><div class="line">git rebase --abort       //终止 rebase</div></pre></td></tr></table></figure>
+<h2 id="Git-隐藏-stash-的使用"><a href="#Git-隐藏-stash-的使用" class="headerlink" title="Git 隐藏 stash 的使用"></a>Git 隐藏 stash 的使用</h2><p><strong>stash</strong> 这个命令行，主要是应用于情景在一些工作做到了一半，不得不去做别的事情的时候用的。例如说，你正在写一个新功能的实现代码，突然领导叫你去修改新的BUG。但是你现在写到一半的代码又不想提交，那怎么办？使用命令 <code>git stash</code> 把当前的工作隐藏起来，也就是把当前工作存到了堆栈上。然后你就可以切换到别的分支进行修改 BUG。当 BUG 修改完毕后，使用命令 <code>git stash list</code> 命令查看已存在更改的列表。使用命令 <code>`git stash pop</code> 即可从堆栈中恢复你新功能的代码到当前的工作目录。</p>
+<h2 id="Git-修正错误"><a href="#Git-修正错误" class="headerlink" title="Git 修正错误"></a>Git 修正错误</h2><p>使用命令：<code>git checkout</code>，场景有：</p>
+<ol>
+<li>修改了本地文件，但是不想要修改的内容了（恢复未提交的文件）</li>
+<li>从本地存储库获取已删除的文件</li>
+<li>使用命令 <code>git checkout head -- file</code> 把 file 恢复到 <code>HEAD</code> 指针当前指的版本</li>
+</ol>
+<h2 id="Git-关于-reset-命令及其参数-–hard-soft-mixed"><a href="#Git-关于-reset-命令及其参数-–hard-soft-mixed" class="headerlink" title="Git 关于 reset 命令及其参数 –hard|soft|mixed"></a>Git 关于 reset 命令及其参数 –hard|soft|mixed</h2><h3 id="reset-的应用场景"><a href="#reset-的应用场景" class="headerlink" title="reset 的应用场景"></a>reset 的应用场景</h3><p><code>reset</code> 一般用来回退版本的。使用场景有：</p>
+<ol>
+<li>把<strong>缓冲区</strong>的文件退回到<strong>工作目录</strong>。执行代码：<code>git reset</code></li>
+<li>回滚最近一次提交。执行代码：<code>git commit -a -m &quot;备注&quot;</code> -&gt; </li>
+</ol>
+<h3 id="–hard-soft-mixed"><a href="#–hard-soft-mixed" class="headerlink" title="–hard | soft | mixed"></a>–hard | soft | mixed</h3><p>–soft 、–mixed以及–hard是三个恢复等级。使用–soft就仅仅将头指针恢复，已经add的缓存以及工作空间的所有东西都不变。如果使用–mixed，就将头恢复掉，已经add的缓存也会丢失掉，工作空间的代码什么的是不变的。如果使用–hard，那么一切就全都恢复了，头变，aad的缓存消失，代码什么的也恢复到以前状态。</p>
+<h2 id="基本的命令行"><a href="#基本的命令行" class="headerlink" title="基本的命令行"></a>基本的命令行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">git status    //显示索引文件和当前HEAD提交之间的差异，在工作树和索引文件之间有差异的路径以及工作树中没有被Git跟踪的路径。</div><div class="line">git diff    //查看具体的修改记录（diff = different）</div><div class="line">git log    //显示从最近到最远的提交日志（可以看得见 SHA 码；如果输出信息太多可以加上 --pretty=oneline</div><div class="line">git checkout -- file    //可以放弃工作区的修改（--很重要，没有--，就变成了“切换到另一个分支”的命令）</div><div class="line">git push -u origin master    //将当前分支 master 推送到远程</div><div class="line">git remote add origin git@server-name:path/repo-name.git    //关联一个远程库</div><div class="line">git merge b    //把 b 分支合并到当前分支,使用 --no--ff 参数表示禁用 Fast forward</div><div class="line">git checkout -b dev    //创建 dev 分支，切换 dev 分支</div><div class="line">git branch dev          </div><div class="line">git checkout dev       //这两条相当于上面一条</div><div class="line">git branch             //查看当前分支</div><div class="line">git branch -d feature1    //删除分支 feature1</div><div class="line">git stash    //备份当前的工作区的内容，从最近的一次提交中读取相关内容，让工作区保证和上次提交的内容一致。同时，将当前的工作区内容保存到Git栈中。</div><div class="line">git stash pop    //从Git栈中读取最近一次保存的内容，恢复工作区的相关内容。由于可能存在多个Stash的内容，所以用栈来管理，pop会从最近的一个stash中读取内容并恢复。</div><div class="line">git stash list    //显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。</div><div class="line">git stash clear    //清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了。</div><div class="line">git rm --cached file_path    //当我们需要删除暂存区或分支上的文件，不希望某个文件被版本控制</div></pre></td></tr></table></figure>
+<h2 id="提交修改和提交新文件"><a href="#提交修改和提交新文件" class="headerlink" title="提交修改和提交新文件"></a>提交修改和提交新文件</h2><p>第一步：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add</div></pre></td></tr></table></figure></p>
+<p>第二步：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m “”   双引号中间是备注</div></pre></td></tr></table></figure></p>
+<h2 id="回退版本"><a href="#回退版本" class="headerlink" title="回退版本"></a>回退版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD^   回退到上一个版本</div><div class="line">git reset --hard SHA     根据 SHA 来回退到某一个版本</div></pre></td></tr></table></figure>
+<h1 id="IntelliJ-IDEA-提交代码到远程及可能遇到的一些问题"><a href="#IntelliJ-IDEA-提交代码到远程及可能遇到的一些问题" class="headerlink" title="IntelliJ IDEA 提交代码到远程及可能遇到的一些问题"></a>IntelliJ IDEA 提交代码到远程及可能遇到的一些问题</h1><h2 id="相关步骤"><a href="#相关步骤" class="headerlink" title="相关步骤"></a>相关步骤</h2><ol>
+<li>配置 <code>git</code> </li>
+<li>配置 <code>gitHub</code> 的账号</li>
+<li>clone 项目下来本地</li>
+<li>提交代码：右键项目 <code>Git</code> -&gt; <code>Add</code> -&gt; <code>Commit</code> （先 add 再提交！）。</li>
+</ol>
+<h2 id="Git-Shell-中配置远程仓库"><a href="#Git-Shell-中配置远程仓库" class="headerlink" title="Git Shell 中配置远程仓库"></a>Git Shell 中配置远程仓库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd 项目目录</div><div class="line">git remote add origin 项目 githubAddress</div><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<p>中间如果有报错 请参考下边的解决方法<br> 1.<strong>fatal:remote origin already exists</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote rm origin</div></pre></td></tr></table></figure></p>
+<p> 2.<strong>error:Could not remove config section ‘remote.origin’</strong><br>需要修改gitconfig文件的内容 找到github的安装路径，我是C:\Users\Administrator\AppData<br>\Local\GitHub\PortableGit_0f65d050d0c352找到一个名为gitconfig的文件，打开它把里面的[remote “origin”]那一行删掉重启gitshell  执行上述操作。<br>3.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git push -u origin master</div><div class="line">To git@github.com:xxx/xxx.git</div><div class="line"> ! [rejected]        master -&gt; master (fetch first)</div><div class="line">error: failed to push some refs to 'git@github.com:xxx/xxx.git'</div><div class="line">hint: Updates were rejected because the remote contains work that you do</div><div class="line">hint: not have locally. This is usually caused by another repository pushing</div><div class="line">hint: to the same ref. You may want to first integrate the remote changes</div><div class="line">hint: (e.g., 'git pull ...') before pushing again.</div><div class="line">hint: See the 'Note about fast-forwards' in 'git push --help' for details.</div></pre></td></tr></table></figure></p>
+<p>造成这个原因的一般是因为远程仓库对比本地仓库有文件是没有的（例如 README.md）。所以我们在提交前要进行拉取。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git pull --rebase origin master  //先拉取内容</div><div class="line">git push -u origin master        //再推送到 master</div></pre></td></tr></table></figure></p>
+<h2 id="另一种做法"><a href="#另一种做法" class="headerlink" title="另一种做法"></a>另一种做法</h2><p>在 Github 上创建仓库并复制仓库地址比如 <a href="https://github.com/lujianing/demo.git，" target="_blank" rel="external">https://github.com/lujianing/demo.git，</a><br>然后在 IntelliJ IDEA 中 <code>VCS</code> -&gt; <code>Checkout from Version Contrl</code> -&gt; <code>Git</code> 中，粘贴仓库 url 地址，会从 Github 仓库中拷贝一份项目，然后就可以在本地直接进行 git 操作。并且可以push到github仓库中（会提示你输入github的仓库和密码）。</p>
+<h2 id="IntelliJ-IDEA进行-push-pull"><a href="#IntelliJ-IDEA进行-push-pull" class="headerlink" title="IntelliJ IDEA进行 push/pull"></a>IntelliJ IDEA进行 push/pull</h2><p>右键项目，<code>Git</code> -&gt; <code>Repository</code> -&gt; <code>Push</code><br>右键项目，<code>Git</code> -&gt; <code>Repository</code> -&gt; <code>Pull</code></p>
+<h2 id="多人协作开发"><a href="#多人协作开发" class="headerlink" title="多人协作开发"></a>多人协作开发</h2><p>在 <code>GitHub</code> 项目的 <code>settings</code> -&gt; <code>Collaborators</code> 添加成员。</p>
+<h2 id="忽略-idea-文件夹"><a href="#忽略-idea-文件夹" class="headerlink" title="忽略 .idea 文件夹"></a>忽略 .idea 文件夹</h2><p>首先你需要从 github 新建的仓库中拉去 .gitignore，然后<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">git rm -rf --cached targetFile</div></pre></td></tr></table></figure></p>
+<p>这个命令行想要 <code>.gitignore</code> 起作用，必须要在这些文件不在暂存区中才可以，<code>.gitignore</code> 文件只是忽略没有被 staged(cached) 文件，对于已经被 staged 文件，加入 ignore 文件时一定要先从 staged 移除，才可以忽略。</p>
+<h1 id="在-IntelliJ-IDEA-上新建项目与-Github-连接（简单教程）"><a href="#在-IntelliJ-IDEA-上新建项目与-Github-连接（简单教程）" class="headerlink" title="在 IntelliJ IDEA 上新建项目与 Github 连接（简单教程）"></a>在 IntelliJ IDEA 上新建项目与 Github 连接（简单教程）</h1><ol>
+<li>首先在本地上创建好你的项目，及项目的框架。</li>
+<li><p>然后执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd 项目文件夹</div><div class="line">git init        //建立此项目的本地 git 仓库</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后在 Github 上新建项目所属的仓库。由于第一次创建，上面可能会有 <code>.gitignore</code> <code>README.md</code> 等文件在本地仓库是没有的，所以我们先要进行拉取。执行命令行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote add origin 项目 githubAddress  //将它们关联起来</div><div class="line">git pull --rebase origin master  //先拉取内容</div></pre></td></tr></table></figure>
+</li>
+<li><p>拉取完了，我们可以开始推送了。<strong><em>右键项目</em></strong> -&gt; <code>git</code> -&gt; <code>add</code>，然后再<strong><em>右键项目</em></strong> -&gt; <code>git</code> -&gt; <code>commint</code>。这时文件都提交到本地仓库了，然后我们就可以通过命令行进行提交到远程了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master        //推送到远程github master</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置忽略 .idea 文件夹</strong>。一般来说，github 项目都是不带上相关编译器的文件的，这样比较纯净。所以我们要设置忽略 .idea 文件夹。可以根据上面的<strong>忽略 .idea 文件夹</strong>的教程进行调整。</p>
+</li>
+</ol>
+<h1 id="平时使用-Git-的一些注意事项"><a href="#平时使用-Git-的一些注意事项" class="headerlink" title="平时使用 Git 的一些注意事项"></a>平时使用 Git 的一些注意事项</h1><ol>
+<li>当我们每次想要去commit的时候，<strong><em>我们都需要先从线上 pull 最新的代码到本地仓库</em></strong>，然后在把暂存区里面的代码提交到本地仓库，这个时候如果没有冲突固然是最好的，如果有了冲突，这我需要解决冲突，这个此时本地仓库已经是最新的代码且又包括暂存区上面的代码了。</li>
+</ol>
+<h1 id="错误大全"><a href="#错误大全" class="headerlink" title="错误大全"></a>错误大全</h1><h2 id="从远程仓库中拉去失败-Fetch-failed-Could-not-read-from-remote-repository"><a href="#从远程仓库中拉去失败-Fetch-failed-Could-not-read-from-remote-repository" class="headerlink" title="从远程仓库中拉去失败(Fetch failed: Could not read from remote repository.)"></a>从远程仓库中拉去失败(Fetch failed: Could not read from remote repository.)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Fetch failed: Could not read from remote repository.</div></pre></td></tr></table></figure>
+<p>打开 <code>IDEA</code>，通过 <code>settings</code> -&gt; <code>Version Control</code> -&gt; <code>Git</code> -&gt; <code>SSH Executable</code> 中把 <code>Built-in</code> 更改为 <code>Native</code> 。注意：Make sure you have the files id_rsa and id_rsa.pub stored in the correct location as well.The id_rsa.pub contains the your SSH keys!!! </p>
+<h2 id="HEAD-detached-at-detached-HEAD-状态"><a href="#HEAD-detached-at-detached-HEAD-状态" class="headerlink" title="HEAD detached at (detached HEAD 状态)"></a>HEAD detached at (detached HEAD 状态)</h2><p>莫名遇到了一个错误，git 告诉我我当前 <code>HEAD</code> 指向了 <code>e29b3fe</code>,然后我就有点纳闷！查过网上后发现原来是 <code>HEAD</code> 现在指向了没有分支名字的修订版本，也就是说处于游离状态（detachhed HEAD）。当执行命令 <code>git status</code> 的时候，发现了 <code>HEAD detached at e29b3fe</code> 这句话，也就是说指针指向了一个无名指针。也就说，我们做的工作很有可能在这个无名指针上面。所以解决方案是：1.首先，给这个无名分支创造一个临时的分支，执行命令为 <code>git branch tmp e29b3fe</code>(tmp 是分支的名字)。2.然后 merge 到当前分支。执行命令为 <code>git checkout master</code> 和 <code>git merge tmp</code>。3. 最后删除 tmp 的分支，执行命令 <code>git branch -d tmp</code>。</p>
+<hr>
+<p>参考文献：<br><a href="http://www.yiibai.com/git/git_rebase.html" target="_blank" rel="external">git 学习教程</a></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/17/第一次CCF计算机职业资格认证考试/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2017/10/19/git的学习笔记/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
